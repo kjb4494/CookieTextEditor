@@ -10,3 +10,8 @@
 
 > git pull origin master --allow-unrelated-histories  
 원격 레파지토리의 프로젝트를 가져온다.
+
+## 크롬에서 실행하기
+- 크롬 브라우저에서 chrome://extensions/  
+- 개발자모드 ON
+- 압축해제된 확장 프로그램을 로드
