@@ -88,27 +88,7 @@ if (!chrome.cookies) {
       removeCookiesForDomain(domain);
     });
   }
-  function removeAll() {
-    var all_cookies = [];
-    cache.getDomains().forEach(function(domain) {
-      cache.getCookies(domain).forEach(function(cookie) {
-        all_cookies.push(cookie);
-      });
-    });
-    cache.reset();
-    var count = all_cookies.length;
-    var timer = new Timer();
-    for (var i = 0; i < count; i++) {
-      removeCookie(all_cookies[i]);
-    }
-    timer.reset();
-    chrome.cookies.getAll({}, function(cookies) {
-      for (var i in cookies) {
-        cache.add(cookies[i]);
-        removeCookie(cookies[i]);
-      }
-    });
-  }
+  
   function removeCookie(cookie) {
     var url = "http" + (cookie.secure ? "s" : "") + "://" + cookie.domain +
               cookie.path;
@@ -135,7 +115,9 @@ if (!chrome.cookies) {
   }
   function reloadCookieTable() {
     reload_scheduled = false;
-    var filter = select("#filter").value;
+    // 필터
+    var txt = select("#filter").value;
+    filter = txt.replace('www.', '');
     var domains = cache.getDomains(filter);
     select("#filter_count").innerText = domains.length;
     select("#total_count").innerText = cache.getDomains().length;
@@ -148,24 +130,24 @@ if (!chrome.cookies) {
     }
     resetTable();
     var table = select("#cookies");
-    domains.forEach(function(domain) {
-      var cookies = cache.getCookies(domain);
-      var row = table.insertRow(-1);
-      row.insertCell(-1).innerText = domain;
-      var cell = row.insertCell(-1);
-      cell.innerText = cookies.length;
-      cell.setAttribute("class", "cookie_count");
-      var button = document.createElement("button");
-      button.innerText = "delete";
-      button.onclick = (function(dom){
-        return function() {
-          removeCookiesForDomain(dom);
-        };
-      }(domain));
-      var cell = row.insertCell(-1);
-      cell.appendChild(button);
-      cell.setAttribute("class", "button");
-    });
+    if (domains.length != 0){
+        domains.forEach(function(domain) {
+            var cookies = cache.getCookies(domain);
+            var row = table.insertRow(-1);
+            row.insertCell(-1).innerText = domain;
+            var cell = row.insertCell(-1);
+            // 쿠키값 보이기
+            cookies.forEach(function(cookie){
+                cell.innerText += cookie.name + '=' + cookie.value + '\n';
+            })
+            cell.setAttribute("class", "cookie_count");
+          });
+    } else{
+        var row = table.insertRow(-1);
+        var cell = row.insertCell(-1);
+        cell.innerText = "Cookie Not Found!";
+        cell.colSpan = 2;
+    }
   }
   function focusFilter() {
     select("#filter").focus();
@@ -200,6 +182,11 @@ if (!chrome.cookies) {
   function onload() {
     focusFilter();
     var timer = new Timer();
+    chrome.tabs.query({'active': true}, function (tabs) {
+        var url = tabs[0].url;
+        url = url.split('/')[2]
+        document.querySelector('#filter_div input').value = url
+    });
     chrome.cookies.getAll({}, function(cookies) {
       startListening();
       start = new Date();
@@ -213,7 +200,6 @@ if (!chrome.cookies) {
   document.addEventListener('DOMContentLoaded', function() {
     onload();
     document.body.addEventListener('click', focusFilter);
-    document.querySelector('#remove_button').addEventListener('click', removeAll);
     document.querySelector('#filter_div input').addEventListener(
         'input', reloadCookieTable);
     document.querySelector('#filter_div button').addEventListener(
