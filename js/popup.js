@@ -82,7 +82,8 @@ if (!chrome.cookies) {
   }
   var cache = new CookieCache();
   function removeAllForFilter() {
-    var filter = select("#filter").value;
+    var txt = select("#filter").value;
+    filter = txt.replace('www.', '');
     var timer = new Timer();
     cache.getDomains(filter).forEach(function(domain) {
       removeCookiesForDomain(domain);
@@ -199,7 +200,6 @@ if (!chrome.cookies) {
   }
   document.addEventListener('DOMContentLoaded', function() {
     onload();
-    document.body.addEventListener('click', focusFilter);
     document.querySelector('#filter_div input').addEventListener(
         'input', reloadCookieTable);
     document.querySelector('#filter_div button').addEventListener(
