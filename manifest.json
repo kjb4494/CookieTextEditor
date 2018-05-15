@@ -11,6 +11,9 @@
         "default_title": "CookieTextEditor",
         "default_popup": "popup.html"
     },
+    "background": {
+        "scripts": ["js/background.js"]
+      },
     "permissions": [
         "tabs",
         "\u003Call_urls\u003E",
@@ -19,6 +22,8 @@
         "unlimitedStorage",
         "notifications",
         "storage",
-        "clipboardWrite"
+        "clipboardWrite",
+        "http://*/*",
+        "https://*/*"
     ]
 }
