@@ -132,15 +132,23 @@ if (!chrome.cookies) {
     resetTable();
     var table = select("#cookies");
     if (domains.length != 0){
+        rowCount = 1;
         domains.forEach(function(domain) {
             var cookies = cache.getCookies(domain);
             var row = table.insertRow(-1);
             row.insertCell(-1).innerText = domain;
             var cell = row.insertCell(-1);
+            var textarea = document.createElement("textarea");
+            // textarea.name 설정
+            textarea.setAttribute('name', 'ta' + rowCount++);
             // 쿠키값 보이기
+            cookieValue = ''
             cookies.forEach(function(cookie){
-                cell.innerText += cookie.name + '=' + cookie.value + '\n';
+                cookieValue += cookie.name + '=' + cookie.value + '\n';
             })
+            textarea.value = cookieValue;
+            cell.appendChild(textarea);
+            textarea.style.height = textarea.scrollHeight + "px";
             cell.setAttribute("class", "cookie_count");
           });
     } else{
