@@ -149,13 +149,14 @@ if (!chrome.cookies) {
             textarea.value = cookieValue;
             cell.appendChild(textarea);
             textarea.style.height = textarea.scrollHeight + "px";
-            cell.setAttribute("class", "cookie_count");
+            textarea.setAttribute('spellcheck', 'false');
           });
     } else{
         var row = table.insertRow(-1);
         var cell = row.insertCell(-1);
         cell.innerText = "Cookie Not Found!";
         cell.colSpan = 2;
+        cell.setAttribute("class", "cookie_not_found");
     }
   }
   function focusFilter() {
