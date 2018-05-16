@@ -89,6 +89,26 @@ if (!chrome.cookies) {
       removeCookiesForDomain(domain);
     });
   }
+
+  // 변경된 쿠기값을 적용시킬 함수
+  function setCookies(){
+    var txt = select("#filter").value;
+    filter = txt.replace('www.', '');
+    var domains = cache.getDomains(filter);
+    domains.forEach(function(domain){
+      cookiesPac = document.getElementById('ta_' + domain).value;
+      var cookies = cookiesPac.split('\n');
+      // \n으로 나눈 쿠키값
+      cookies.forEach(function(cookie){
+        if (cookie != ''){
+          var i = cookie.indexOf('=');
+          var cookieName = cookie.slice(0, i);
+          var cookieValue = cookie.slice(i + 1);
+          alert(cookieName + '\n' + cookieValue);
+        }
+      });
+    });
+  }
   
   function removeCookie(cookie) {
     var url = "http" + (cookie.secure ? "s" : "") + "://" + cookie.domain +
@@ -123,16 +143,22 @@ if (!chrome.cookies) {
     select("#filter_count").innerText = domains.length;
     select("#total_count").innerText = cache.getDomains().length;
     select("#delete_all_button").innerHTML = "";
+    select("#set_cookies_button").innerHTML = "";
     if (domains.length) {
       var button = document.createElement("button");
       button.onclick = removeAllForFilter;
       button.innerText = "delete all " + domains.length;
       select("#delete_all_button").appendChild(button);
+      // setCookies Button
+      var button = document.createElement("button");
+      button.onclick = setCookies;
+      button.style.marginLeft = '5px';
+      button.innerText = "set cookies";
+      select("#set_cookies_button").appendChild(button);
     }
     resetTable();
     var table = select("#cookies");
     if (domains.length != 0){
-        rowCount = 1;
         domains.forEach(function(domain) {
             var cookies = cache.getCookies(domain);
             var row = table.insertRow(-1);
@@ -140,9 +166,9 @@ if (!chrome.cookies) {
             var cell = row.insertCell(-1);
             var textarea = document.createElement("textarea");
             // textarea.name 설정
-            textarea.setAttribute('name', 'ta' + rowCount++);
+            textarea.setAttribute('id', 'ta_' + domain);
             // 쿠키값 보이기
-            cookieValue = ''
+            cookieValue = '';
             cookies.forEach(function(cookie){
                 cookieValue += cookie.name + '=' + cookie.value + '\n';
             })
