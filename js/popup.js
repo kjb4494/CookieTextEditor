@@ -96,18 +96,24 @@ if (!chrome.cookies) {
     filter = txt.replace('www.', '');
     var domains = cache.getDomains(filter);
     domains.forEach(function(domain){
+      // url 정보를 저장하고 기존 쿠키는 삭제
+      var cookie = cache.getCookies(domain)[0];
+      var url = "http" + (cookie.secure ? "s" : "") + "://" + cookie.domain +
+      cookie.path;
+      removeCookiesForDomain(domain);
       cookiesPac = document.getElementById('ta_' + domain).value;
       var cookies = cookiesPac.split('\n');
-      // \n으로 나눈 쿠키값
       cookies.forEach(function(cookie){
         if (cookie != ''){
           var i = cookie.indexOf('=');
           var cookieName = cookie.slice(0, i);
           var cookieValue = cookie.slice(i + 1);
-          alert(cookieName + '\n' + cookieValue);
+          // 변형된 쿠키값 적용
+          chrome.cookies.set({"url": url, "name": cookieName, "value": cookieValue});
         }
       });
     });
+    reloadCookieTable();
   }
   
   function removeCookie(cookie) {
