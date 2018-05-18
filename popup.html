@@ -1,60 +1,26 @@
 <html>
-<head>
-<style>
-body {
-    min-width:700px;
-}
-
-table {
-  border-collapse:collapse;
-}
-th {
-  border: 1px solid black;
-  padding-left: 5px;
-  word-break:break-all;
-  table-layout:fixed;
-}
-td {
-  border: 1px solid black;
-  padding-left: 5px;
-  word-break:break-all;
-  table-layout:fixed;
-}
-
-textarea {
-    border: 0;
-    resize: none;
-    width: 100%;
-    outline: none;
-    min-height: 50px;
-}
-
-td.button {
-  border: none;
-}
-td.cookie_not_found {
-  text-align: center;
-}
-</style>
-<script src="js/popup.js"></script>
-</head>
-<body>
-  <h2>Text Editor for Cookie</h2>
-  <hr>
-  <div id="filter_div">
-    Filter: <input id="filter" type="text">
-    <button>x</button>
-  </div>
-  <br />
-  <div id="summary_div">
-    Showing <span id="filter_count"></span> of <span id="total_count"></span> cookie domains.
-    <span id="delete_all_button"></span><span id="set_cookies_button"></span>
-  </div>
-  <br />
-  <table id="cookies">
-    <tr class="header">
-      <th width='200px'>Name</th>
-      <th width='500px'>Cookies</th>
-    </tr>
-  </body>
+  <head>
+    <link rel="stylesheet" href="css/default.css">
+    <script src="js/popup.js"></script>
+  </head>
+  <body>
+    <h2>Text Editor for Cookie</h2>
+    <hr>
+    <div id="filter_div">
+      Filter: <input id="filter" type="text">
+      <button>x</button>
+    </div>
+    <br />
+    <div id="summary_div">
+      Showing <span id="filter_count"></span> of <span id="total_count"></span> cookie domains.
+      <span id="delete_all_button"></span><span id="set_cookies_button"></span>
+    </div>
+    <br />
+      <table id="cookies">
+        <tr>
+          <th width='200px'>Domain</th>
+          <th width='500px'>Cookies</th>
+        </tr>
+      </table>
+    </body>
 </html>

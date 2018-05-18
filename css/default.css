@@ -1,0 +1,32 @@
+body {
+    min-width:700px;
+}
+
+table {
+  border-collapse:collapse;
+}
+
+th {
+  border: 1px solid black;
+  padding-left: 5px;
+  word-break:break-all;
+  table-layout:fixed;
+}
+td {
+  border: 1px solid black;
+  padding-left: 5px;
+  word-break:break-all;
+  table-layout:fixed;
+}
+
+table textarea {
+    border: 0;
+    resize: none;
+    width: 100%;
+    outline: none;
+    min-height: 50px;
+}
+
+td.cookie_not_found {
+  text-align: center;
+}
