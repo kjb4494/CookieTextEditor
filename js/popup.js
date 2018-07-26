@@ -288,8 +288,7 @@ function onload(){
 
 function uploadFile(){
   var file = select("#file");
-  
-  file.onchang = function(){
+  file.onchange = function(){
     var fileList = file.files;
 
     for(var i = 0; i < fileList.length; i++){
