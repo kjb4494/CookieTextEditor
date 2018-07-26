@@ -1,32 +1,171 @@
-body {
-    min-width:700px;
+body{
+  min-width: 500px;
+  min-height: 700px;
+  background-color: burlywood;
 }
-
-table {
-  border-collapse:collapse;
-}
-
-th {
-  border: 1px solid black;
-  padding-left: 5px;
-  word-break:break-all;
-  table-layout:fixed;
-}
-td {
-  border: 1px solid black;
-  padding-left: 5px;
-  word-break:break-all;
-  table-layout:fixed;
-}
-
-table textarea {
-    border: 0;
-    resize: none;
-    width: 100%;
-    outline: none;
-    min-height: 50px;
-}
-
-td.cookie_not_found {
+h1 {
+  width: 100%;
+  color: #53370B;
   text-align: center;
 }
+
+#URL_div{
+  position: relative;
+  width: 100%;
+  height: 5%;
+  border: 2px solid #53370B;
+  border-radius: 5px;
+  background-color: white;
+}
+
+#URL_div input{
+  position: relative;
+  width: 90%;
+  height: 100%;
+  border: none; 
+  border-radius: 5px;
+  display: inline;
+  outline: none; 
+  padding-left: 10px;
+  color: #53370B;
+  font-size: 2em; 
+} 
+
+#URL_div button{
+  position: absolute;
+  width: 10%;
+  height: 100%;
+  border: 0;
+  border-color: white;
+  border-radius: 5px;
+  background: no-repeat;
+  display: inline;
+  outline: none;
+  margin-left: -4px;
+}
+
+button:active{
+  transform: scale(0.9);
+}
+
+#URL_div i{
+  font-size: 2em;
+  color: #53370B;    
+}
+
+#URL_div i:hover{
+  color: darkred;    
+}
+
+#Summary_div{
+  position: relative;
+  margin-top: 20px;
+  width: 100%;
+  height: 5%;
+}
+
+#Summary_div strong{
+  font-size: 1.5em;
+  color: #53370B;
+}
+
+#Summary_div button[id=check]{
+  position: absolute;
+  width: 3em;
+  border: 0;
+  background: no-repeat;
+  display: inline;
+  outline: none;
+  left: 10.4cm;
+}
+
+#Summary_div i:hover{
+  color: darkred;
+}
+
+#Summary_div button[id=times]{
+  position: absolute;
+  width: 3em;
+  border: 0;
+  background: no-repeat;
+  display: inline;
+  outline: none;
+  left: 12.4cm;
+}
+
+#Summary_div i{
+  font-size: 2em;
+  color: #53370B; 
+}
+
+#Summary_div input{
+  display: none;
+}
+
+#Summary_div button[id=folder]{
+  position: absolute;
+  width: 3em;
+  border: 0;
+  background: no-repeat;
+  display: inline;
+  outline: none;
+  left: 8.4cm;
+}
+
+#Summary_div i{
+  font-size: 2em;
+  color: #53370B; 
+} 
+
+#Summary_div label{
+  margin-left: -1em;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+#Cookie_div{
+  position: relative;
+  margin-top: 20px;
+  width: 100%;
+  height: 5%;
+}
+
+#Cookie_div table{
+  border-collapse: collapse;
+  text-align: center;
+  background-color: white;
+}
+
+#Cookie_div th{
+  border: 3px solid #53370B;
+  padding-left: 5px;
+  word-break:break-all;
+  table-layout:fixed; 
+}
+
+#Cookie_div td{
+  border: 3px solid #53370B;
+  padding-left: 5px;
+  word-break:break-all;
+  table-layout:fixed;
+  color: #53370B;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+#Cookie_div textarea{
+  border: 0;
+  resize:  none;
+  width: 100%;
+  outline: none;
+  min-height: 50px;
+  color: #53370B;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+#Cookie_div strong{
+  font-size: 1.5em;
+  color: #53370B;
+}
+
