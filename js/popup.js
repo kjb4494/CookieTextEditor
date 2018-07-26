@@ -242,6 +242,19 @@ function onload() {
   });
 }
 
+function file_upload(e) {
+  var reader = new FileReader();
+  
+  var fileToRead = document.querySelector('#file_div input').files;
+
+  reader.addEventListener("loadend", function(){
+    var temp = reader.result;
+    document.getElementById("file").innerText = temp;
+  });
+
+  reader.readAsText(fileToRead);
+}
+
 // 확장프로그램 document가 로드되면 onload를 실행시키며,
 // 필터의 input과 reset버튼에 이벤트리스너를 부여한다.
 document.addEventListener('DOMContentLoaded', function () {
@@ -250,4 +263,6 @@ document.addEventListener('DOMContentLoaded', function () {
     'input', reloadCookieTable);
   document.querySelector('#filter_div button').addEventListener(
     'click', resetFilter);
+  document.querySelector('#file_div button').addEventListener(
+    'click', file_upload);
 });
